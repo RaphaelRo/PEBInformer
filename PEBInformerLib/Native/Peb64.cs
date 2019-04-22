@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace PEBInformerLib.Native
 {
-    // 64 BIT PEB
+    // 64 BIT PEB  size: 0x7c8
     //+0x000 InheritedAddressSpace : UChar
     //+0x001 ReadImageFileExecOptions : UChar
     //+0x002 BeingDebugged    : UChar
@@ -132,7 +132,7 @@ namespace PEBInformerLib.Native
     /// found at FS:[0x30] in the TEB for 32-bit processes, 
     /// and it’s located at GS:[0x60] for 64-bit processes.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x7c8)]
     public struct Peb64 : IPeb
     {
         private byte _inheritedAddressSpace;
@@ -162,6 +162,8 @@ namespace PEBInformerLib.Native
         private long _loaderData;
         private long _processParameters;
 
+        #region IPeb
+
         public byte InheritedAddressSpace => _inheritedAddressSpace;
 
         public byte ReadImageFileExecutionOptions => _readImageFileExecutionOptions;
@@ -170,6 +172,15 @@ namespace PEBInformerLib.Native
 
         public byte BitField => _bitField;
 
+        public bool ImageUsesLargePages => _bitField.GetBitValue(0);
+        public bool IsProtectedProcess => _bitField.GetBitValue(1);
+        public bool IsImageDynamicallyRelocated => _bitField.GetBitValue(2);
+        public bool SkipPatchingUser32Forwarders => _bitField.GetBitValue(3);
+        public bool IsPackagedProcess => _bitField.GetBitValue(4);
+        public bool IsAppContainer => _bitField.GetBitValue(5);
+        public bool IsProtectedProcessLight => _bitField.GetBitValue(6);
+        public bool IsLongPathAwareProcess => _bitField.GetBitValue(7);
+
         public IntPtr Mutant => new IntPtr(_mutant);
 
         public IntPtr ImageBaseAddress => new IntPtr(_imageBaseAddress);
@@ -177,5 +188,7 @@ namespace PEBInformerLib.Native
         public IntPtr LoaderData => new IntPtr(_loaderData);
 
         public IntPtr ProcessParameters => new IntPtr(_processParameters);
+
+        #endregion
     };
 }

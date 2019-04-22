@@ -41,14 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteExtensions.cs" />
     <Compile Include="IPeb.cs" />
+    <Compile Include="IRtlUserProcessParameters.cs" />
+    <Compile Include="BitArrayExtensions.cs" />
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Native\Peb32.cs" />
     <Compile Include="Native\Peb64.cs" />
     <Compile Include="Native\ProcessAccessFlags.cs" />
     <Compile Include="Native\ProcessBasicInformation.cs" />
+    <Compile Include="Native\RtlDriveLetterCurdir64.cs" />
     <Compile Include="Native\RtlUserProcessParameters32.cs" />
     <Compile Include="Native\RtlUserProcessParameters64.cs" />
+    <Compile Include="Native\String32.cs" />
+    <Compile Include="Native\String64.cs" />
     <Compile Include="Native\UnicodeString32.cs" />
     <Compile Include="Native\UnicodeString64.cs" />
     <Compile Include="ProcessMemory.cs" />

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace PEBInformerLib.Native
 {
     /// <summary>
-    /// RTL_USER_PROCESS_PARAMETERS
+    /// RTL_USER_PROCESS_PARAMETERS size: 0x420
     ///+0x000 MaximumLength    : Uint4B
     ///+0x004 Length           : Uint4B
     ///+0x008 Flags            : Uint4B
@@ -40,7 +40,7 @@ namespace PEBInformerLib.Native
     ///+0x40c LoaderThreads    : Uint4B
     ///+0x410 RedirectionDllName : _UNICODE_STRING
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x420)]
     public struct RtlUserProcessParameters64
     {
         public uint MaximumLength;
@@ -49,7 +49,7 @@ namespace PEBInformerLib.Native
         public uint DebugFlags;
         public IntPtr ConsoleHandle;
         public uint ConsoleFlags;
-        private uint _padding;
+        private uint _padding1;
         public IntPtr StandardInput;
         public IntPtr StandardOutput;
         public IntPtr StandardError;
@@ -58,5 +58,28 @@ namespace PEBInformerLib.Native
         public UnicodeString64 DllPath;
         public UnicodeString64 ImagePathName;
         public UnicodeString64 CommandLine;
+        public IntPtr Environment;
+        public uint StartingX;
+        public uint StartingY;
+        public uint CountX;
+        public uint CountY;
+        public uint CountCharsX;
+        public uint CountCharsY;
+        public uint FillAttribute;
+        public uint WindowFlags;
+        public uint ShowWindowFlags;
+        private uint _padding2;
+        public UnicodeString64 WindowTitle;
+        public UnicodeString64 DesktopInfo;
+        public UnicodeString64 ShellInfo;
+        public UnicodeString64 RuntimeData;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+        public RtlDriveLetterCurdir64[] CurrentDirectores;
+        public ulong EnvironmentSize;
+        public ulong EnvironmentVersion;
+        public IntPtr PackageDependencyData;
+        public uint ProcessGroupId;
+        public uint LoaderThreads;
+        public UnicodeString64 RedirectionDllName;
     };
 }

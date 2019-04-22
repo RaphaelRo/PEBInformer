@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 namespace PEBInformerLib.Native
 {
     /// <summary>
-    /// UNICODE_STRING
+    /// UNICODE_STRING size: 0x10
     ///+0x000 Length           : Uint2B
     ///+0x002 MaximumLength    : Uint2B
     ///+0x008 Buffer           : Ptr64 Wchar
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 10)]
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 0x10)]
     public struct UnicodeString64
     {
         /// <summary>

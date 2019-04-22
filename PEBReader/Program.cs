@@ -9,15 +9,26 @@ namespace PEBReader
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter process name:");
-            var processName = Console.ReadLine();
-            var process = Process.GetProcessesByName(processName).FirstOrDefault();
-            using (var procmem = new ProcessMemory(process))
+            while (true)
             {
-                procmem.Open();
-                Console.WriteLine(procmem.GetCommandLine());
+                Console.WriteLine("Enter process name:");
+                var processName = Console.ReadLine();
+                if (processName == "exit" || processName == "q")
+                {
+                    break;
+                }
+                var process = Process.GetProcessesByName(processName).FirstOrDefault();
+                if (process == null)
+                {
+                    Console.WriteLine("Process not found.");
+                    continue;
+                }
+                using (var procmem = new ProcessMemory(process))
+                {
+                    procmem.Open();
+                    Console.WriteLine(procmem.GetCommandLine());
+                }
             }
-            Console.Read();
         }
 
     }

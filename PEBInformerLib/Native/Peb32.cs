@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Runtime.InteropServices;
 
 namespace PEBInformerLib.Native
@@ -150,21 +151,36 @@ namespace PEBInformerLib.Native
         private int _loaderData;
         private int _processParameters;
 
-        byte IPeb.InheritedAddressSpace => _inheritedAddressSpace;
 
-        byte IPeb.ReadImageFileExecutionOptions => _readImageFileExecutionOptions;
+        #region IPeb
 
-        byte IPeb.BeingDebugged => _beingDebugged;
+        public byte InheritedAddressSpace => _inheritedAddressSpace;
 
-        byte IPeb.BitField => _bitField;
+        public byte ReadImageFileExecutionOptions => _readImageFileExecutionOptions;
 
-        IntPtr IPeb.Mutant => new IntPtr(_mutant);
+        public byte BeingDebugged => _beingDebugged;
 
-        IntPtr IPeb.ImageBaseAddress => new IntPtr(_imageBaseAddress);
+        public byte BitField => _bitField;
 
-        IntPtr IPeb.LoaderData => new IntPtr(_loaderData);
+        public bool ImageUsesLargePages => _bitField.GetBitValue(0);
+        public bool IsProtectedProcess => _bitField.GetBitValue(1);
+        public bool IsImageDynamicallyRelocated => _bitField.GetBitValue(2);
+        public bool SkipPatchingUser32Forwarders => _bitField.GetBitValue(3);
+        public bool IsPackagedProcess => _bitField.GetBitValue(4);
+        public bool IsAppContainer => _bitField.GetBitValue(5);
+        public bool IsProtectedProcessLight => _bitField.GetBitValue(6);
+        public bool IsLongPathAwareProcess => _bitField.GetBitValue(7);
 
-        IntPtr IPeb.ProcessParameters => new IntPtr(_processParameters);
+        public IntPtr Mutant => new IntPtr(_mutant);
+                      
+        public IntPtr ImageBaseAddress => new IntPtr(_imageBaseAddress);
+                      
+        public IntPtr LoaderData => new IntPtr(_loaderData);
+                      
+        public IntPtr ProcessParameters => new IntPtr(_processParameters);
+
+        #endregion
+
     };
 
 }
