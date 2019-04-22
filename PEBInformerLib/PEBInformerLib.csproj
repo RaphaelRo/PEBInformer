@@ -45,6 +45,7 @@
     <Compile Include="IPeb.cs" />
     <Compile Include="IRtlUserProcessParameters.cs" />
     <Compile Include="BitArrayExtensions.cs" />
+    <Compile Include="Native\ListEntry.cs" />
     <Compile Include="Native\NativeMethods.cs" />
     <Compile Include="Native\Peb32.cs" />
     <Compile Include="Native\Peb64.cs" />
